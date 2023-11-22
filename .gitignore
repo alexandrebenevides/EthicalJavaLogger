@@ -1,0 +1,53 @@
+# Arquivos de compilação
+build/
+dist/
+
+# Arquivos NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+nbactions.xml
+.nb-gradle/
+
+# Logs
+*.log
+
+# Diretório de configuração para NetBeans
+nb-configuration.xml
+
+# Dependências do Maven
+target/
+.nb-gradle/
+*.iml
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Arquivos gerados por IDEs
+.idea/
+
+# Arquivos de configuração do Gradle
+.gradle/
+
+# Arquivos de log do Gradle
+gradle-*.log
+
+# Cache do Gradle
+build/
+.gradle/
+
+# Diretório de saída do Maven
+target/
+
+# Arquivos de configuração específicos do sistema operacional
+Thumbs.db
+.DS_Store
+
+# Cache do Javadoc
+javadoc/
+
+# Arquivos temporários
+*.swp
+*~
