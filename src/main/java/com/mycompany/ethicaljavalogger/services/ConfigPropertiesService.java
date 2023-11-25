@@ -6,8 +6,7 @@ import java.util.Properties;
 
 public class ConfigPropertiesService {
 
-    private static final String CONFIG_FILE = "config.properties";
-
+    private final String configFile = "config.properties";
     private Properties properties;
 
     public ConfigPropertiesService() {
@@ -17,9 +16,9 @@ public class ConfigPropertiesService {
     private Properties loadProperties() {
         Properties prop = new Properties();
         
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE)) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(configFile)) {
             if (input == null) {
-                System.err.println("Desculpe, o arquivo de configuração '" + CONFIG_FILE + "' não foi encontrado.");
+                System.err.println("Desculpe, o arquivo de configuração '" + configFile + "' não foi encontrado.");
                 return null;
             }
 
@@ -45,9 +44,5 @@ public class ConfigPropertiesService {
         }
         
         return null;
-    }
-
-    private Properties getProperties() {
-        return properties;
     }
 }

@@ -51,6 +51,7 @@ javadoc/
 # Arquivos temporários
 *.swp
 *~
+temp/
 
 # Arquivos de configuração
 src/main/resources/config.properties
