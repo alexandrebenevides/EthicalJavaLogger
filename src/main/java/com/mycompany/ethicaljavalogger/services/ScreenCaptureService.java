@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.imageio.ImageIO;
 
 public class ScreenCaptureService {
@@ -26,5 +28,11 @@ public class ScreenCaptureService {
         }
         
         return null;
+    }
+    
+    public static String generateFileName() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
+        return "screencapture_" + currentDateTime.format(formatter) + ".png";
     }
 }

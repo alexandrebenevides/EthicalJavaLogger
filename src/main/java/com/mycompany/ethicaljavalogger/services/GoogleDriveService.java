@@ -55,9 +55,6 @@ public class GoogleDriveService {
         this.mainFolderId = this.createFolderIfNotExists("ethical_java_logger", null);
         this.imagesFolderId = this.createFolderIfNotExists("screen_captures", this.mainFolderId);
         this.logsFolderId = this.createFolderIfNotExists("logs", this.mainFolderId);
-        System.out.println(this.mainFolderId);
-        System.out.println(this.imagesFolderId);
-        System.out.println(this.logsFolderId);
     }
     
     public static GoogleDriveService getInstance() throws IOException, GeneralSecurityException {
@@ -109,14 +106,13 @@ public class GoogleDriveService {
         try {
             do {
                 FileList result = this.getService().files().list()
-                        .setQ(query)
-                        .setSpaces("drive")
-                        .setFields("nextPageToken, files(id)")
-                        .setPageToken(pageToken)
-                        .execute();
+                    .setQ(query)
+                    .setSpaces("drive")
+                    .setFields("nextPageToken, files(id)")
+                    .setPageToken(pageToken)
+                    .execute();
 
                 for (File file : result.getFiles()) {
-                    // Retorna o ID da primeira correspondência encontrada
                     return file.getId();
                 }
 
@@ -149,16 +145,14 @@ public class GoogleDriveService {
         try {           
             java.io.File fileContent = new java.io.File(pathImage);
             File fileMetadata = new File();
-            fileMetadata.setName("arquivo_drive_2.png");
+            fileMetadata.setName(ScreenCaptureService.generateFileName());
             fileMetadata.setParents(Collections.singletonList(folderId));
             
             FileContent mediaContent = new FileContent("image/png", fileContent);
             
-            File uploadedFile = this.getService().files().create(fileMetadata, mediaContent)
-                    .setFields("id, parents")
-                    .execute();
-            
-            System.out.println(uploadedFile.getId());
+            this.getService().files().create(fileMetadata, mediaContent)
+                .setFields("id, parents")
+                .execute();
         }   catch (IOException ex) {
             Logger.getLogger(GoogleDriveService.class.getName()).log(Level.SEVERE, null, ex);
         }
