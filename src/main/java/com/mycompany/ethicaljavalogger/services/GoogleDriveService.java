@@ -39,6 +39,8 @@ public class GoogleDriveService {
         String clientId = configPropertiesService.getGoogleDriveClientId();
         String clientSecret = configPropertiesService.getGoogleDriveClientSecret();
         
+        System.out.println(clientId);
+        
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, clientId, clientSecret, scopes)
             .setDataStoreFactory(new FileDataStoreFactory(dataStoreDir))
             .setAccessType("offline")
@@ -57,12 +59,19 @@ public class GoogleDriveService {
         this.logsFolderId = this.createFolderIfNotExists("logs", this.mainFolderId);
     }
     
-    public static GoogleDriveService getInstance() throws IOException, GeneralSecurityException {
-        if (instance == null) {
-            instance = new GoogleDriveService();
+    public static GoogleDriveService getInstance() {
+        System.out.println();
+        try {
+            if (instance == null) {
+                instance = new GoogleDriveService();
+            }
+
+            return instance;
+        } catch (IOException | GeneralSecurityException ex) {
+            System.out.println(ex.getMessage());
         }
         
-        return instance;
+        return null;
     }
     
     public Drive getService() {
@@ -142,7 +151,7 @@ public class GoogleDriveService {
     }
     
     public void sendMedia(String pathImage, String folderId) {
-        try {           
+        try {
             java.io.File fileContent = new java.io.File(pathImage);
             File fileMetadata = new File();
             fileMetadata.setName(ScreenCaptureService.generateFileName());
@@ -153,8 +162,8 @@ public class GoogleDriveService {
             this.getService().files().create(fileMetadata, mediaContent)
                 .setFields("id, parents")
                 .execute();
-        }   catch (IOException ex) {
-            Logger.getLogger(GoogleDriveService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

