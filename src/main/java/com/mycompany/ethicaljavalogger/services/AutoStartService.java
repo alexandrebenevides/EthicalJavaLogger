@@ -13,8 +13,8 @@ public class AutoStartService {
 
     public boolean verificarRegistro() {
         try {
-            Preferences prefs = Preferences.userRoot().node("com").node(this.registryKey);
-            String valor = prefs.get("Autostart", null);
+            Preferences prefs = Preferences.userRoot().node(this.registryKey);
+            String valor = prefs.get("EthicalJavaLogger", null);
             return this.jarPath.equals(valor);
         } catch (Exception e) {
             return false;
@@ -23,8 +23,8 @@ public class AutoStartService {
 
     public void registrarParaIniciarComWindows() {
         try {
-            Preferences prefs = Preferences.userRoot().node("com").node(this.registryKey);
-            prefs.put("Autostart", this.jarPath);
+            Preferences prefs = Preferences.userRoot().node(this.registryKey);
+            prefs.put("EthicalJavaLogger", this.jarPath);
         } catch (Exception e) {
             //
         }
