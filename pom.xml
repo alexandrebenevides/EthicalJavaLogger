@@ -28,6 +28,11 @@
             <artifactId>google-api-services-drive</artifactId>
             <version>v3-rev20230822-2.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>5.13.0</version>
+        </dependency>
     </dependencies>
     
     <build>
