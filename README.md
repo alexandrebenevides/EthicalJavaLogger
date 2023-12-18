@@ -12,13 +12,13 @@ Este programa foi desenvolvido estritamente com a finalidade de estudo e pesquis
 
 ## Funcionalidades Principais
 
-- **Integração com o Google Drive:** Armazenamento de arquivos no Google Drive.
+- **Integração com o Google Drive:** :white_check_mark: Armazenamento de arquivos no Google Drive.
 
-- **Envio de Screenshot com Temporização:** Capture e envie screenshots com intervalos configuráveis.
+- **Envio de Screenshot com Temporização:** :white_check_mark: Capture e envie screenshots com intervalos configuráveis.
 
-- **Inicialização Automática com o Windows:** O programa se inicia automaticamente com o sistema operacional.
+- **Inicialização Automática com o Windows:** :white_check_mark: O programa se inicia automaticamente com o sistema operacional.
 
-- **Detecção de Entradas do Teclado:** Registro e análise das entradas do teclado.
+- **Detecção de Entradas do Teclado:** :hourglass: Registro e análise das entradas do teclado.
 
 ## Requisitos
 
