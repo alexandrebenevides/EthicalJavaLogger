@@ -12,13 +12,13 @@ Este programa foi desenvolvido estritamente com a finalidade de estudo e pesquis
 
 ## Funcionalidades Principais
 
-- **Integração com o Google Drive:** :white_check_mark: Armazenamento de arquivos no Google Drive.
+- **Integração com o Google Drive** :white_check_mark: ;
 
-- **Envio de Screenshot com Temporização:** :white_check_mark: Capture e envie screenshots com intervalos configuráveis.
+- **Envio de Screenshot com Temporização de 5 minutos** :white_check_mark: ;
 
-- **Inicialização Automática com o Windows:** :white_check_mark: O programa se inicia automaticamente com o sistema operacional.
+- **Inicialização Automática com o Windows** :white_check_mark: ;
 
-- **Detecção de Entradas do Teclado:** :hourglass: Registro e análise das entradas do teclado.
+- **Detecção de Entradas do Teclado** :hourglass: .
 
 ## Requisitos
 
@@ -27,7 +27,15 @@ Este programa foi desenvolvido estritamente com a finalidade de estudo e pesquis
 ## Como Usar
 
 1. Clone o projeto para a sua máquina local.
-2. Copie e cole o arquivo "src\main\resources\config.properties.example" com o nome "config.properties" no mesmo diretório.
-3. Edite o arquivo "config.properties" com as suas credenciais da sua conta Google.
+2. Copie e cole o arquivo `src\main\resources\config.properties.example` com o nome `config.properties` no mesmo diretório.
+3. Edite o arquivo `config.properties` com as suas credenciais da sua conta Google.
 4. Compile o projeto usando o seu ambiente de desenvolvimento Java favorito. Esse projeto foi desenvolvido utilizando o Apache NetBeans IDE 19.
-5. Execute o arquivo jar em "target\EthicalJavaLogger-release.jar".
+5. Execute o arquivo jar em `target\EthicalJavaLogger-release.jar`.
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue para reportar bugs, sugerir melhorias ou enviar um pull request.
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
