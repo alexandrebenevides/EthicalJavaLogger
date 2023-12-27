@@ -162,7 +162,7 @@ public class GoogleDriveService {
                 .setFields("id, parents")
                 .execute();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(GoogleDriveService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
