@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class ScreenCaptureService {
@@ -24,7 +26,7 @@ public class ScreenCaptureService {
 
             return tempFile.getAbsolutePath();
         } catch (AWTException | IOException ex) {
-            System.err.println("Erro ao capturar a tela: " + ex.getMessage());
+            Logger.getLogger(ScreenCaptureService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return null;

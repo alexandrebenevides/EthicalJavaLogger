@@ -1,12 +1,13 @@
 package com.mycompany.ethicaljavalogger.services;
 
-import java.util.prefs.Preferences;
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AutoStartService {
-    private String registryKey;
-    private String jarPath;
+    private final String registryKey;
+    private final String jarPath;
     
     public AutoStartService(String jarPath) {
         this.registryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -24,10 +25,9 @@ public class AutoStartService {
 
     public void registerToStartWithWindows() {
         try {
-            System.out.println(this.jarPath);
             Advapi32Util.registrySetStringValue(WinReg.HKEY_CURRENT_USER, this.registryKey, "EthicalJavaLogger", this.jarPath);
-        } catch (Exception e) {
-            //
+        } catch (Exception ex) {
+            Logger.getLogger(AutoStartService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
