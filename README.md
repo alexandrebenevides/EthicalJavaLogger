@@ -18,7 +18,7 @@ Este programa foi desenvolvido estritamente com a finalidade de estudo e pesquis
 
 - **Inicialização Automática com o Windows** :white_check_mark: ;
 
-- **Detecção de Entradas do Teclado** :hourglass: .
+- **Detecção de Entradas do Teclado** :white_check_mark: .
 
 ## Requisitos
 
@@ -30,7 +30,7 @@ Este programa foi desenvolvido estritamente com a finalidade de estudo e pesquis
 2. Copie e cole o arquivo `src\main\resources\config.properties.example` com o nome `config.properties` no mesmo diretório.
 3. Edite o arquivo `config.properties` com as suas credenciais da sua conta Google.
 4. Compile o projeto usando o seu ambiente de desenvolvimento Java favorito. Esse projeto foi desenvolvido utilizando o Apache NetBeans IDE 19.
-5. Execute o arquivo jar em `target\EthicalJavaLogger-release.jar`.
+5. Copie o arquivo jar, de `target\EthicalJavaLogger-release.jar`, em qualquer diretório e execute-o.
 
 ## Contribuição
 

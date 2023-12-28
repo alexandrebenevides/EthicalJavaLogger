@@ -30,7 +30,7 @@ public class ScreenCaptureService {
         return null;
     }
     
-    public static String generateFileName() {
+    public String generateFileName() {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
         return "screencapture_" + currentDateTime.format(formatter) + ".png";

