@@ -17,10 +17,9 @@ public class ScreenCaptureService {
 
     public String capture() {
         try {
-            Robot robot = new Robot();
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-            BufferedImage screenCapture = robot.createScreenCapture(screenRect);
-            File tempFile = new File("temp/tempImage");
+            BufferedImage screenCapture = new Robot().createScreenCapture(screenRect);
+            File tempFile = new File(DiretoryService.getParentApplicationPath() + "\\temp\\tempImage");
             tempFile.mkdirs();
             ImageIO.write(screenCapture, "png", tempFile);
 

